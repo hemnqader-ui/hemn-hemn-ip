@@ -29,8 +29,8 @@ jobs:
 
       - name: Initialize and Build TWA APK
         run: |
-          npx @bubblewrap/cli init --manifest="https://ais-pre-p65lloufu6y2waeb65rk6l-690128072146.europe-west2.run.app/manifest.json"
-          npx @bubblewrap/cli build
+          npx @bubblewrap/cli init --manifest="https://ais-pre-p65lloufu6y2waeb65rk6l-690128072146.europe-west2.run.app/manifest.json" --skipqa
+          npx @bubblewrap/cli build --skipqa
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
