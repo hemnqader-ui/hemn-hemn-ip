@@ -1,4 +1,4 @@
-name: Build Android APK via PWABuilder
+name: Build Android APK via Bubblewrap
 
 on:
   push:
@@ -13,14 +13,27 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Build Android App (PWABuilder)
-        uses: pwa-builder/pwa-action@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          site-url: 'https://ais-pre-p65lloufu6y2waeb65rk6l-690128072146.europe-west2.run.app'
-          output-dir: 'android-app'
+          node-version: 18
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install Bubblewrap CLI
+        run: npm install -g @bubblewrap/cli
+
+      - name: Initialize and Build TWA APK
+        run: |
+          npx @bubblewrap/cli init --manifest="https://ais-pre-p65lloufu6y2waeb65rk6l-690128072146.europe-west2.run.app/manifest.json"
+          npx @bubblewrap/cli build
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: IPTV-HEMN-APK
-          path: android-app/
+          path: ./*.apk
