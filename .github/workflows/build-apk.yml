@@ -1,0 +1,26 @@
+name: Build Android APK via PWABuilder
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Build Android App (PWABuilder)
+        uses: pwa-builder/pwa-action@v1
+        with:
+          site-url: 'https://ais-pre-p65lloufu6y2waeb65rk6l-690128072146.europe-west2.run.app'
+          output-dir: 'android-app'
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: IPTV-HEMN-APK
+          path: android-app/
