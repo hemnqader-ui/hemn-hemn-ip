@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build Android App (PWABuilder)
         uses: pwa-builder/pwa-action@v1
@@ -20,7 +20,7 @@ jobs:
           output-dir: 'android-app'
 
       - name: Upload APK Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: IPTV-HEMN-APK
           path: android-app/
